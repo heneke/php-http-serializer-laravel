@@ -18,10 +18,10 @@ class HttpSerializerServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->register(PropertyNamingStrategyInterface::class, function (Application $app) {
+        $this->app->singleton(PropertyNamingStrategyInterface::class, function (Application $app) {
             return $this->getPropertyNamingStrategy();
         });
-        $this->app->register(SerializerInterface::class, function (Application $app) {
+        $this->app->singleton(SerializerInterface::class, function (Application $app) {
             AnnotationRegistry::registerLoader('class_exists');
             if ($this->isCacheEnabled()) {
                 $cacheDir = storage_path('jms');
@@ -40,10 +40,10 @@ class HttpSerializerServiceProvider extends ServiceProvider
                     ->build();
             }
         });
-        $this->app->register(TypeRegistry::class, function (Application $app) {
+        $this->app->singleton(TypeRegistry::class, function (Application $app) {
             return new LaravelTypeRegistry();
         });
-        $this->app->register(HttpSerializer::class, function (Application $app) {
+        $this->app->singleton(HttpSerializer::class, function (Application $app) {
             return new JmsHttpSerializer(
                 $this->app->make(SerializerInterface::class),
                 $this->app->make(TypeRegistry::class)
