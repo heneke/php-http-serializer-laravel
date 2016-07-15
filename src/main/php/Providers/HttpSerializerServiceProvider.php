@@ -2,6 +2,8 @@
 namespace Heneke\Http\Serializer\Illuminate\Providers;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Heneke\Http\Serializer\Illuminate\Facade\Serialization;
+use Heneke\Http\Serializer\Illuminate\Facade\SerializationFacade;
 use Heneke\Http\Serializer\Illuminate\LaravelTypeRegistry;
 use Heneke\Http\Serializer\JmsHttpSerializer;
 use Illuminate\Contracts\Foundation\Application;
@@ -48,6 +50,9 @@ class HttpSerializerServiceProvider extends ServiceProvider
                 $this->app->make(SerializerInterface::class),
                 $this->app->make(TypeRegistry::class)
             );
+        });
+        $this->app->singleton(Serialization::ACCESSOR, function (Application $app) {
+            return new SerializationFacade($app, $app->make(HttpSerializer::class));
         });
     }
 
