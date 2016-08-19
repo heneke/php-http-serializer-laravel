@@ -2,6 +2,7 @@
 namespace Heneke\Http\Serializer\Illuminate\Providers;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Heneke\Http\Serializer\Handler\CarbonHandler;
 use Heneke\Http\Serializer\Illuminate\Facade\Serialization;
 use Heneke\Http\Serializer\Illuminate\Facade\SerializationFacade;
 use Heneke\Http\Serializer\Illuminate\LaravelTypeRegistry;
@@ -9,6 +10,7 @@ use Heneke\Http\Serializer\JmsHttpSerializer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
+use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
@@ -32,12 +34,18 @@ class HttpSerializerServiceProvider extends ServiceProvider
                 }
                 return SerializerBuilder::create()
                     ->setDebug(env('APP_DEBUG', false))
+                    ->configureHandlers(function (HandlerRegistry $handlerRegistry) {
+                        $handlerRegistry->registerSubscribingHandler(new CarbonHandler());
+                    })
                     ->setPropertyNamingStrategy($this->app->make(PropertyNamingStrategyInterface::class))
                     ->setCacheDir($cacheDir)
                     ->build();
             } else {
                 return SerializerBuilder::create()
                     ->setDebug(env('APP_DEBUG', false))
+                    ->configureHandlers(function (HandlerRegistry $handlerRegistry) {
+                        $handlerRegistry->registerSubscribingHandler(new CarbonHandler());
+                    })
                     ->setPropertyNamingStrategy($this->app->make(PropertyNamingStrategyInterface::class))
                     ->build();
             }
