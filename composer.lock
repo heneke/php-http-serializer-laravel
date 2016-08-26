@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97a111df4c52601ef9b16b577a7656f1",
-    "content-hash": "fd4a497685d9243ca45ada5e83d69dd0",
+    "hash": "ab507f6a7a2bef7f33bc2f83c2207ac8",
+    "content-hash": "e00ca44d9fada706a1f8ffb10630a6e6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -310,16 +310,16 @@
         },
         {
             "name": "heneke/http-serializer",
-            "version": "v0.3.1",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "ssh://git@github.com/heneke/php-http-serializer",
-                "reference": "7818a45740b7c704dc9dd7ec43ecafb404276d7d"
+                "reference": "e18b342ba83e1aaaaa06a5e52064b594e5a155ad"
             },
             "require": {
-                "guzzlehttp/psr7": "^1.3.1",
+                "guzzlehttp/psr7": "^1.3",
                 "jms/serializer": "^1.1",
-                "nesbot/carbon": "1.21.0",
+                "nesbot/carbon": "^1.21",
                 "php": ">=5.6.0",
                 "psr/http-message": "^1.0",
                 "willdurand/negotiation": "^2.0"
@@ -349,7 +349,7 @@
                 }
             ],
             "description": "HTTP message serializer",
-            "time": "2016-08-25 12:39:28"
+            "time": "2016-08-26 05:56:33"
         },
         {
             "name": "illuminate/container",
